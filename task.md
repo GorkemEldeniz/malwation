@@ -1,4 +1,4 @@
-- apollo en dışta olacak
+- apollo en dışta olacak [x]
 - http link apollo
 - client olustururken error handle etme
 - auth state => user state yap
