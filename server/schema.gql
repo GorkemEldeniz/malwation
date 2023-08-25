@@ -1,0 +1,88 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type GetUsersListItem {
+  id: String!
+  name: String!
+  createdAt: Float!
+  active: Boolean!
+}
+
+type Query {
+  getUsersList(input: GetUsersListInput!): GetUsersListResult!
+  getOneUser(input: GetOneUserInput!): GetOneUserResult!
+}
+
+union GetUsersListResult = GetUsersList | Error
+
+type GetUsersList {
+  users: [GetUsersListItem!]!
+}
+
+type Error {
+  errorMessage: String!
+}
+
+input GetUsersListInput {
+  name: String!
+}
+
+union GetOneUserResult = GetOneUser | Error
+
+type GetOneUser {
+  name: String!
+  active: Boolean!
+  permissions: [String!]!
+}
+
+input GetOneUserInput {
+  id: String!
+}
+
+type Mutation {
+  login(input: LoginInput!): LoginResult!
+  deleteUser(input: DeleteUserInput!): MessageOrErrorResult!
+  createUser(input: CreateUserInput!): MessageOrErrorResult!
+  updateUser(input: UpdateUserInput!): MessageOrErrorResult!
+}
+
+union LoginResult = LoginData | Error
+
+type LoginData {
+  id: String!
+  name: String!
+  permissions: [String!]!
+}
+
+input LoginInput {
+  name: String!
+  password: String!
+}
+
+union MessageOrErrorResult = Message | Error
+
+type Message {
+  message: String!
+}
+
+input DeleteUserInput {
+  id: String!
+}
+
+input CreateUserInput {
+  name: String!
+  password: String!
+}
+
+input UpdateUserInput {
+  user: UpdateUserInputField!
+  id: String!
+}
+
+input UpdateUserInputField {
+  name: String!
+  password: String!
+  active: Boolean!
+  permissions: [String!]!
+}

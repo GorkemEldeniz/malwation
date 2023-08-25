@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+
+  body,
+  #root {
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  svg {
+    fill: currentColor;
+  }
+
+  button {
+    border-color: currentColor;
+  }
+
+  .spinner_P7sC {
+    transform-origin: center;
+    animation: spinner_svv2 .75s infinite linear
+  }
+
+  @keyframes spinner_svv2 {
+    100% {
+      transform: rotate(360deg)
+    }
+  }
+}
+
+@layer utilities {
+  .bg-image {
+    background-image: url('/asset/check.svg');
+    background-size: 1.5rem 1.5rem;
+    background-position: center;
+    background-repeat: none;
+  }
+}

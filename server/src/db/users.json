@@ -1,0 +1,25 @@
+[
+  {
+    "id": "1692907497276",
+    "name": "Gizem",
+    "active": true,
+    "permissions": [
+      "Update",
+      "Delete",
+      "Create"
+    ],
+    "password": "123",
+    "createdAt": 1692907497276
+  },
+  {
+    "id": "1692908474259",
+    "name": "Görkem",
+    "active": true,
+    "permissions": [
+      "Update",
+      "Delete"
+    ],
+    "password": "123",
+    "createdAt": 1692908474259
+  }
+]
