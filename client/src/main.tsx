@@ -13,13 +13,13 @@ import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <ApolloProvider client={client}>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
           <ToastContainer />
           <Router />
-        </ApolloProvider>
-      </PersistGate>
-    </Provider>
+        </PersistGate>
+      </Provider>
+    </ApolloProvider>
   </React.StrictMode>
 );
