@@ -14,13 +14,13 @@ import { GET_ONE_USER } from "@libs/apollo/api/user";
 import type {
   GetOneUser,
   GetOneUserVariables,
-} from "@libs/apollo/api/user/__generated__/GetOneUser";
+} from "@libs/apollo/api/user/types/GetOneUser";
 
 import { UPDATE_USER } from "@libs/apollo/api/user";
 import type {
   UpdateUser,
   UpdateUserVariables,
-} from "@libs/apollo/api/user/__generated__/UpdateUser";
+} from "@libs/apollo/api/user/types/UpdateUser";
 
 const permissionsArray = ["Read", "Create", "Delete", "Update"] as const;
 export const UpdateForm = z.object({
@@ -52,6 +52,7 @@ function User() {
   );
 
   const { loading } = useQuery<GetOneUser, GetOneUserVariables>(GET_ONE_USER, {
+    fetchPolicy: "network-only",
     variables: {
       input: {
         id: userId as string,
@@ -101,9 +102,6 @@ function User() {
     onError: (err) => {
       console.log(err);
     },
-    refetchQueries: [
-      { query: GET_ONE_USER, variables: { input: { id: userId as string } } },
-    ],
   });
 
   const {
@@ -116,9 +114,7 @@ function User() {
     resolver: zodResolver(UpdateForm),
   });
   const onSubmit: SubmitHandler<IUpdateInput> = (userData) => {
-    if (!currentUserPermissions?.includes("Update")) {
-      console.log("maalesef güncelleme hakkınız yoktur");
-    } else {
+    if (currentUserPermissions?.includes("Update")) {
       UpdateUser({
         variables: {
           input: {
@@ -129,10 +125,10 @@ function User() {
           },
         },
       });
-    }
+    } else console.log("maalesef güncelleme hakkınız yoktur");
   };
 
-  if (loading) return <div>Loading..</div>;
+  if (loading || MutationLoading) return <div>Loading..</div>;
 
   return (
     <form

@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { GetUsersListInput } from "./../../../../../../__generated__/globalTypes";
+import { GetUsersListInput } from "../../../../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL query operation: GetUsersList

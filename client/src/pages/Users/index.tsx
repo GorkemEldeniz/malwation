@@ -1,24 +1,34 @@
 import { useNavigate } from "react-router-dom";
 
+import { useAppSelector, useAppDispatch } from "@libs/redux/hook";
+import { logout } from "@libs/redux/reducers/user";
+
 import { useMutation, useQuery } from "@apollo/client";
+
 import { GET_USERS_LIST } from "@libs/apollo/api/user";
 import type {
   GetUsersList,
   GetUsersListVariables,
-} from "@libs/apollo/api/user/__generated__/GetUsersList";
+} from "@libs/apollo/api/user/types/GetUsersList";
 
 import { DELETE_USER } from "@libs/apollo/api/user";
 import type {
   DeleteUser,
   DeleteUserVariables,
-} from "@libs/apollo/api/user/__generated__/DeleteUser";
+} from "@libs/apollo/api/user/types/DeleteUser";
 
 function Users() {
+  const dispatch = useAppDispatch();
+  const { permissions: currentUserPermissions, id } = useAppSelector(
+    (state) => state.user
+  );
+
   const navigator = useNavigate();
 
   const { data, loading } = useQuery<GetUsersList, GetUsersListVariables>(
     GET_USERS_LIST,
     {
+      fetchPolicy: "network-only",
       variables: {
         input: {
           name: "",
@@ -47,6 +57,11 @@ function Users() {
         console.log(response.deleteUser.errorMessage);
       }
       if (response.deleteUser.__typename === "Message") {
+        //kullanıcı kendini silerse
+        const [deletedUserId] = response.deleteUser.message.split(" ");
+        if (deletedUserId === id) {
+          dispatch(logout());
+        }
         console.log(response.deleteUser.message);
       }
     },
@@ -59,21 +74,32 @@ function Users() {
   });
 
   const handleDelete = (id: string) => {
-    DeleteUser({
-      variables: {
-        input: {
-          id: id,
+    if (currentUserPermissions?.includes("Delete")) {
+      DeleteUser({
+        variables: {
+          input: {
+            id: id,
+          },
         },
-      },
-    });
+      });
+    } else console.log("Kullanıcıda Delete hakkı yoktur");
   };
 
-  if (loading) return <div>Loading..</div>;
+  const handleRead = () => {
+    if (
+      currentUserPermissions?.includes("Read") ||
+      currentUserPermissions?.includes("Update")
+    ) {
+      navigator(`${id}`);
+    } else console.log("Kullanıcıda Read hakkı yoktur");
+  };
+
+  if (loading || MutationLoading) return <div>Loading..</div>;
 
   return (
     <div className="flex flex-col gap-4">
       {data?.getUsersList.users.map((user) => (
-        <div onClick={() => navigator(`${user.id}`)} key={user.id}>
+        <div key={user.id} onClick={handleRead}>
           <div>name : {user.name}</div>
           <div>id : {user.id}</div>
           <div>active : {user.active ? "active" : "passive"}</div>

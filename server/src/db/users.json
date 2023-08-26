@@ -1,1 +1,36 @@
-[{"id":"1693057212228","name":"Gizem","active":true,"permissions":["Read","Create","Delete","Update"],"password":"123","createdAt":1693057212228},{"id":"1693048143574","name":"Batuhan1","active":true,"permissions":["Read","Create","Delete","Update"],"password":"123","createdAt":1693048143574},{"id":"1693047586193","name":"Gorkem1","active":true,"permissions":["Read","Create","Delete","Update"],"password":"deneme","createdAt":1693047586193}]
+[
+  {
+    "id": "1693066398683",
+    "name": "Batuhan",
+    "active": true,
+    "permissions": [
+      "Read",
+      "Create",
+      "Delete",
+      "Update"
+    ],
+    "password": "123",
+    "createdAt": 1693066398683
+  },
+  {
+    "id": "1693069125000",
+    "name": "Gorkem",
+    "active": true,
+    "permissions": [],
+    "password": "123",
+    "createdAt": 1693069125000
+  },
+  {
+    "id": "1693068965330",
+    "name": "Gizem1",
+    "active": false,
+    "permissions": [
+      "Read",
+      "Create",
+      "Delete",
+      "Update"
+    ],
+    "password": "123",
+    "createdAt": 1693068965330
+  }
+]

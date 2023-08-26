@@ -4,15 +4,12 @@ import { login } from "@libs/redux/reducers/user";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { LoginForm } from "@libs/apollo/api/auth/__generated__/Login";
-import type { ILoginInput } from "@libs/apollo/api/auth/__generated__/Login";
+import { LoginForm } from "@libs/apollo/api/auth/types/Login";
+import type { ILoginInput } from "@libs/apollo/api/auth/types/Login";
 
 import { useMutation } from "@apollo/client";
 import LOGIN from "@libs/apollo/api/auth";
-import type {
-  Login,
-  LoginVariables,
-} from "@libs/apollo/api/auth/__generated__/Login";
+import type { Login, LoginVariables } from "@libs/apollo/api/auth/types/Login";
 
 function Login() {
   const dispatch = useAppDispatch();

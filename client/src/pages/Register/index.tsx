@@ -6,21 +6,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useMutation } from "@apollo/client";
 
-import { RegisterForm } from "@libs/apollo/api/user/__generated__/CreateUser";
-import type { IRegisterInput } from "@libs/apollo/api/user/__generated__/CreateUser";
+import { RegisterForm } from "@libs/apollo/api/user/types/CreateUser";
+import type { IRegisterInput } from "@libs/apollo/api/user/types/CreateUser";
 
 import { CREATE_USER } from "@libs/apollo/api/user";
 import LOGIN from "@libs/apollo/api/auth";
 
-import type {
-  Login,
-  LoginVariables,
-} from "@libs/apollo/api/auth/__generated__/Login";
+import type { Login, LoginVariables } from "@libs/apollo/api/auth/types/Login";
 
 import type {
   CreateUser,
   CreateUserVariables,
-} from "@libs/apollo/api/user/__generated__/CreateUser";
+} from "@libs/apollo/api/user/types/CreateUser";
 
 function Login() {
   const dispatch = useAppDispatch();

@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { CreateUserInput } from "./../../../../../../__generated__/globalTypes";
+import { CreateUserInput } from "../../../../../../__generated__/globalTypes";
 import * as z from "zod";
 
 export const RegisterForm = z.object({

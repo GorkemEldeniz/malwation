@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { UpdateUserInput } from "./../../../../../../__generated__/globalTypes";
+import { UpdateUserInput } from "../../../../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL mutation operation: UpdateUser
@@ -19,7 +19,9 @@ export interface UpdateUser_updateUser_Error {
   errorMessage: string;
 }
 
-export type UpdateUser_updateUser = UpdateUser_updateUser_Message | UpdateUser_updateUser_Error;
+export type UpdateUser_updateUser =
+  | UpdateUser_updateUser_Message
+  | UpdateUser_updateUser_Error;
 
 export interface UpdateUser {
   updateUser: UpdateUser_updateUser;
