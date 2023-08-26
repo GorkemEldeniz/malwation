@@ -44,7 +44,12 @@ module.exports = {
     "plugin:prettier/recommended",
     "plugin:tailwindcss/recommended",
   ],
-  ignorePatterns: ["tailwind.config.js", "postcss.config.js"],
+  plugins: ["react", "@typescript-eslint", "prettier", "simple-import-sort"],
+  ignorePatterns: [
+    "tailwind.config.js",
+    "postcss.config.js",
+    "__generated__/globalTypes.ts",
+  ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
@@ -52,13 +57,12 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: "./tsconfig.json",
   },
-  plugins: ["react", "@typescript-eslint", "prettier", "simple-import-sort"],
   rules: {
     "@typescript-eslint/no-unused-vars": "warn",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
     "react/jsx-props-no-spreading": 0,
     "react/react-in-jsx-scope": 0,
     "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
-    "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error",
   },
 };
