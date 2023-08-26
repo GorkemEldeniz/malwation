@@ -27,7 +27,9 @@ export interface GetUsersList_getUsersList_Error {
   errorMessage: string;
 }
 
-export type GetUsersList_getUsersList = GetUsersList_getUsersList_GetUsersList | GetUsersList_getUsersList_Error;
+export type GetUsersList_getUsersList =
+  | GetUsersList_getUsersList_GetUsersList
+  | GetUsersList_getUsersList_Error;
 
 export interface GetUsersList {
   getUsersList: GetUsersList_getUsersList;

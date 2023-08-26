@@ -5,12 +5,12 @@ export interface IUser {
   isLogin: boolean;
   id?: string;
   name?: string;
-  permissions?: string[];
+  permissions?: ("Read" | "Create" | "Delete" | "Update")[];
 }
 interface ILoginAction {
   id: string;
   name: string;
-  permissions: string[];
+  permissions: ("Read" | "Create" | "Delete" | "Update")[];
 }
 
 const initialState: IUser = { isLogin: false };
@@ -30,8 +30,14 @@ const userSlice = createSlice({
         isLogin: false,
       };
     },
+    update: (state, action: PayloadAction<IUser>) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    },
   },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, update } = userSlice.actions;
 export const userReducer = userSlice.reducer;

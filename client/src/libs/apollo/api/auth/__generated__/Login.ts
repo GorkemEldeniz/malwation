@@ -29,7 +29,7 @@ export interface Login_login_LoginData {
   __typename: "LoginData";
   id: string;
   name: string;
-  permissions: string[];
+  permissions: ("Read" | "Create" | "Delete" | "Update")[];
 }
 
 export interface Login_login_Error {

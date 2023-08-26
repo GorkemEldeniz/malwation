@@ -14,7 +14,7 @@ const CREATE_USER = gql`
   }
 `;
 
-const UpdateUser = gql`
+const UPDATE_USER = gql`
   mutation UpdateUser($input: UpdateUserInput!) {
     updateUser(input: $input) {
       __typename
@@ -28,7 +28,7 @@ const UpdateUser = gql`
   }
 `;
 
-const DeleteUser = gql`
+const DELETE_USER = gql`
   mutation DeleteUser($input: DeleteUserInput!) {
     deleteUser(input: $input) {
       __typename
@@ -42,7 +42,7 @@ const DeleteUser = gql`
   }
 `;
 
-const GetUsersList = gql`
+const GET_USERS_LIST = gql`
   query GetUsersList($input: GetUsersListInput!) {
     getUsersList(input: $input) {
       __typename
@@ -61,7 +61,7 @@ const GetUsersList = gql`
   }
 `;
 
-const GetOneUser = gql`
+const GET_ONE_USER = gql`
   query GetOneUser($input: GetOneUserInput!) {
     getOneUser(input: $input) {
       __typename
@@ -77,4 +77,4 @@ const GetOneUser = gql`
   }
 `;
 
-export { DeleteUser, GetOneUser, GetUsersList, UpdateUser, CREATE_USER };
+export { DELETE_USER, GET_ONE_USER, GET_USERS_LIST, UPDATE_USER, CREATE_USER };

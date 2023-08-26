@@ -8,6 +8,9 @@ import {
 
 import useLogin from "@hooks/useLogin";
 
+import Users from "@pages/Users";
+import User from "@pages/Users/User";
+
 import Login from "@pages/Login";
 import Register from "@pages/Register";
 
@@ -40,12 +43,12 @@ const router = (isLogin: boolean) => {
           children: [
             {
               index: true,
-              element: <div>Users</div>,
+              element: <Users />,
               errorElement: <div>hata</div>,
             },
             {
               path: ":userId",
-              element: <div>User</div>,
+              element: <User />,
               caseSensitive: true,
               errorElement: <div>hata</div>,
             },

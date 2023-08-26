@@ -13,7 +13,7 @@ export interface GetOneUser_getOneUser_GetOneUser {
   __typename: "GetOneUser";
   name: string;
   active: boolean;
-  permissions: string[];
+  permissions: ("Read" | "Create" | "Delete" | "Update")[];
 }
 
 export interface GetOneUser_getOneUser_Error {
@@ -21,7 +21,9 @@ export interface GetOneUser_getOneUser_Error {
   errorMessage: string;
 }
 
-export type GetOneUser_getOneUser = GetOneUser_getOneUser_GetOneUser | GetOneUser_getOneUser_Error;
+export type GetOneUser_getOneUser =
+  | GetOneUser_getOneUser_GetOneUser
+  | GetOneUser_getOneUser_Error;
 
 export interface GetOneUser {
   getOneUser: GetOneUser_getOneUser;

@@ -1,15 +1,14 @@
+import { useAppDispatch } from "@libs/redux/hook";
+import { login } from "@libs/redux/reducers/user";
+
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import client from "@libs/apollo";
+import { useMutation } from "@apollo/client";
 
 import { RegisterForm } from "@libs/apollo/api/user/__generated__/CreateUser";
 import type { IRegisterInput } from "@libs/apollo/api/user/__generated__/CreateUser";
 
-import { useAppDispatch } from "@libs/redux/hook";
-import { login } from "@libs/redux/reducers/user";
-
-import { useMutation } from "@apollo/client";
 import { CREATE_USER } from "@libs/apollo/api/user";
 import LOGIN from "@libs/apollo/api/auth";
 
