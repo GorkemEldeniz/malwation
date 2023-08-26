@@ -9,6 +9,7 @@ import {
 import useLogin from "@hooks/useLogin";
 
 import Login from "@pages/Login";
+import Register from "@pages/Register";
 
 const router = (isLogin: boolean) => {
   return createBrowserRouter([
@@ -72,6 +73,26 @@ const router = (isLogin: boolean) => {
         {
           index: true,
           element: <Login />,
+          errorElement: <div>hata</div>,
+          caseSensitive: true,
+        },
+      ],
+    },
+    {
+      path: "/register",
+      element: !isLogin ? (
+        <div>
+          Register Layout <Outlet />
+        </div>
+      ) : (
+        <Navigate to="/" replace />
+      ),
+      errorElement: <div>hata</div>,
+      caseSensitive: true,
+      children: [
+        {
+          index: true,
+          element: <Register />,
           errorElement: <div>hata</div>,
           caseSensitive: true,
         },

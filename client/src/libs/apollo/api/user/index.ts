@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const CreateUser = gql`
+const CREATE_USER = gql`
   mutation CreateUser($input: CreateUserInput!) {
     createUser(input: $input) {
       __typename
@@ -77,4 +77,4 @@ const GetOneUser = gql`
   }
 `;
 
-export { DeleteUser, GetOneUser, GetUsersList, UpdateUser, CreateUser };
+export { DeleteUser, GetOneUser, GetUsersList, UpdateUser, CREATE_USER };
