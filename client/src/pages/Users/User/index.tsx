@@ -1,6 +1,11 @@
 import Button from "@components/ui/button";
 import Input from "@components/ui/Input";
 import ToggleButton from "@components/ui/ToggleButton";
+import CheckBox from "@components/CheckBox";
+
+import { Icon } from "@icon";
+
+import toast from "react-hot-toast";
 
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -52,11 +57,11 @@ function User() {
         setValue("permissions", permissions);
       }
       if (response.getOneUser.__typename == "Error") {
-        console.log(response.getOneUser.errorMessage);
+        toast.error(response.getOneUser.errorMessage);
       }
     },
     onError: (err) => {
-      console.log(err);
+      toast.error(err.message);
     },
   });
 
@@ -66,14 +71,13 @@ function User() {
   >(UPDATE_USER, {
     onCompleted: (response) => {
       if (response.updateUser.__typename === "Error") {
-        console.log(response.updateUser.errorMessage);
+        toast.error(response.updateUser.errorMessage);
       }
       if (response.updateUser.__typename === "Message") {
-        console.log(response.updateUser.message);
+        toast.success(response.updateUser.message);
         // kullanıcı kendini güncellediyse redux store u güncelle
         if (id === userId) {
-          const { name, password, active, permissions } = getValues();
-          console.log("kendimi güncelledim");
+          const { name, permissions } = getValues();
           dispatch(
             update({
               isLogin: true,
@@ -86,7 +90,7 @@ function User() {
       }
     },
     onError: (err) => {
-      console.log(err);
+      toast.error(err.message);
     },
   });
 
@@ -111,13 +115,23 @@ function User() {
           },
         },
       });
-    } else console.log("maalesef güncelleme hakkınız yoktur");
+    } else toast.error("Kullanıcıda güncelleme hakkı yoktur");
   };
 
-  if (loading) return <div>Loading..</div>;
+  if (loading)
+    return (
+      <div className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]">
+        <Icon
+          width="60"
+          height="60"
+          icon="spinner"
+          className="animate-spin fill-current"
+        />
+      </div>
+    );
 
   return (
-    <div className="flex h-screen items-center justify-center">
+    <div className="flex h-full items-center justify-center">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mx-auto flex w-4/5 max-w-[700px] flex-col gap-4 rounded-md border px-7 py-10 shadow-md md:w-2/5"
@@ -143,6 +157,7 @@ function User() {
           error={!!errors.password}
           placeholder="password"
           name="password"
+          type="password"
           register={register}
           rigthIcon="lock"
         />
@@ -157,18 +172,23 @@ function User() {
         />
 
         <label htmlFor="">Permissions</label>
-        {permissionsArray.map((perm, id) => (
-          <div key={id}>
-            <label htmlFor={perm}>{perm}</label>
-            <input
-              disabled={!currentUserPermissions?.includes("Update")}
-              {...register("permissions")}
-              id={perm}
-              value={perm}
-              type="checkbox"
-            />
-          </div>
-        ))}
+        <div className="flex flex-wrap gap-5">
+          {permissionsArray.map((perm, id) => (
+            <div key={id} className="flex items-center gap-2">
+              <label className="cursor-pointer" htmlFor={perm}>
+                {perm}
+              </label>
+              <CheckBox
+                readOnly={!currentUserPermissions?.includes("Update")}
+                disabled={MutationLoading}
+                name="permissions"
+                register={register}
+                id={perm}
+                value={perm}
+              />
+            </div>
+          ))}
+        </div>
 
         <Button
           variant="primary"

@@ -67,7 +67,6 @@ function RegisterComponent() {
             },
           },
         });
-        console.log("başarılı");
       }
       if (response.createUser.__typename === "Error") {
         toast.error(response.createUser.errorMessage);
@@ -125,6 +124,7 @@ function RegisterComponent() {
           error={!!errors.password}
           id="password"
           name="password"
+          type="password"
           register={register}
           rigthIcon="lock"
         />

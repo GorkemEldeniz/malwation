@@ -41,7 +41,6 @@ function DeleteButton({
     onCompleted: (response) => {
       if (response.deleteUser.__typename === "Error") {
         toast.error(response.deleteUser.errorMessage);
-        //console.log(response.deleteUser.errorMessage);
       }
       if (response.deleteUser.__typename === "Message") {
         //kullanıcı kendini silerse

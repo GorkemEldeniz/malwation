@@ -87,6 +87,7 @@ function LoginComponent() {
         <label htmlFor="password">Password</label>
         <Input
           id="password"
+          type="password"
           disabled={loading}
           error={!!errors.password}
           name="password"

@@ -108,7 +108,7 @@ function Table({ data }: ITableProps) {
                             setDeletedUserId(user.id);
                             modalRef.current?.showModal();
                           }}
-                          className="cursor-pointer"
+                          className="cursor-pointer fill-primary stroke-primary"
                           width="20"
                           height="20"
                           icon="rubbish"

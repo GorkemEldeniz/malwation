@@ -53,6 +53,7 @@ export const iconPaths = [
   "battery",
   "spinner",
   "rubbish",
+  "check",
 ] as const;
 
 export type IconTypes = (typeof iconPaths)[number];

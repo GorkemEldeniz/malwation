@@ -1,6 +1,8 @@
 import SearchBar from "@components/SearchBar";
 import Table from "@components/Table";
 
+import { Icon } from "@icon";
+
 import toast from "react-hot-toast";
 
 import { useSearchParams } from "react-router-dom";
@@ -32,7 +34,7 @@ function Users() {
           toast.error(response.getUsersList.errorMessage);
         }
         if (response.getUsersList.__typename === "GetUsersList") {
-          console.log("başarılı");
+          //kullanıcı listesi alındı
         }
       },
       onError: (err) => {
@@ -41,10 +43,20 @@ function Users() {
     }
   );
 
-  if (loading) return <div>Loading..</div>;
+  if (loading)
+    return (
+      <div className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]">
+        <Icon
+          width="60"
+          height="60"
+          icon="spinner"
+          className="animate-spin fill-current"
+        />
+      </div>
+    );
 
   return (
-    <div className="mx-auto flex w-5/6 max-w-[1400px] flex-col items-start gap-2">
+    <div className="mx-auto flex w-5/6 max-w-[1000px] flex-col items-start gap-2">
       <SearchBar />
       <Table data={data} />
     </div>
