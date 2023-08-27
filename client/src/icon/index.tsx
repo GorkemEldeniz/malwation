@@ -52,6 +52,7 @@ export const iconPaths = [
   "usb",
   "battery",
   "spinner",
+  "rubbish",
 ] as const;
 
 export type IconTypes = (typeof iconPaths)[number];

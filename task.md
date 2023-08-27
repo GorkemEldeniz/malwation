@@ -17,3 +17,7 @@
 - kendini silince logout atman gerek
 - bg image kullanmadan checkbox yap
 - tasarımı düzelt
+
+- Delete işleminde modal açılacak
+- Header yapılacak
+- Multiple checkbox yapılacak

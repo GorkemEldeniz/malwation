@@ -1,3 +1,7 @@
+import Button from "@components/ui/button";
+import Input from "@components/ui/Input";
+import ToggleButton from "@components/ui/ToggleButton";
+
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -7,40 +11,22 @@ import { update } from "@libs/redux/reducers/user";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_ONE_USER } from "@libs/apollo/api/user";
+import { GET_ONE_USER } from "@utils/api/user";
 import type {
   GetOneUser,
   GetOneUserVariables,
-} from "@libs/apollo/api/user/types/GetOneUser";
+} from "@utils/api/user/types/GetOneUser";
 
-import { UPDATE_USER } from "@libs/apollo/api/user";
-import type {
+import { UPDATE_USER } from "@utils/api/user";
+import {
   UpdateUser,
   UpdateUserVariables,
-} from "@libs/apollo/api/user/types/UpdateUser";
-
-const permissionsArray = ["Read", "Create", "Delete", "Update"] as const;
-export const UpdateForm = z.object({
-  name: z
-    .string()
-    .min(2)
-    .max(15)
-    .regex(new RegExp("^[a-z0-9]*$", "gi"), "Invalid Character"),
-  password: z
-    .string()
-    .regex(new RegExp("^[a-z0-9]*$", "gi"), "Invalid Character")
-    .refine(
-      (value) => value.length === 0 || (value.length > 2 && value.length < 15),
-      "Password must be maximum 15 and minimum 2 characters"
-    ),
-  active: z.boolean(),
-  permissions: z.array(z.enum(permissionsArray)),
-});
-
-export type IUpdateInput = z.infer<typeof UpdateForm>;
+  UpdateForm,
+  IUpdateInput,
+  permissionsArray,
+} from "@utils/api/user/types/UpdateUser";
 
 function User() {
   const dispatch = useAppDispatch();
@@ -128,54 +114,70 @@ function User() {
     } else console.log("maalesef güncelleme hakkınız yoktur");
   };
 
-  if (loading || MutationLoading) return <div>Loading..</div>;
+  if (loading) return <div>Loading..</div>;
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="mx-auto flex w-1/3 max-w-[500px] flex-col gap-2"
-    >
-      <label htmlFor="">Name</label>
-      <input
-        readOnly={!currentUserPermissions?.includes("Update")}
-        className="border"
-        placeholder="name"
-        {...register("name")}
-      />
-      {errors.name && <div>{errors.name.message}</div>}
+    <div className="flex h-screen items-center justify-center">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="mx-auto flex w-4/5 max-w-[700px] flex-col gap-4 rounded-md border px-7 py-10 shadow-md md:w-2/5"
+      >
+        <label htmlFor="">Name</label>
+        <Input
+          readOnly={!currentUserPermissions?.includes("Update")}
+          className="border"
+          disabled={MutationLoading}
+          error={!!errors.name}
+          placeholder="name"
+          name="name"
+          register={register}
+          rigthIcon="people"
+        />
+        {errors.name && <div>{errors.name.message}</div>}
 
-      <label htmlFor="">Password</label>
-      <input
-        readOnly={!currentUserPermissions?.includes("Update")}
-        className="border"
-        {...register("password")}
-      />
-      {errors.password && <div>{errors.password.message}</div>}
+        <label htmlFor="">Password</label>
+        <Input
+          readOnly={!currentUserPermissions?.includes("Update")}
+          className="border"
+          disabled={MutationLoading}
+          error={!!errors.password}
+          placeholder="password"
+          name="password"
+          register={register}
+          rigthIcon="lock"
+        />
+        {errors.password && <div>{errors.password.message}</div>}
 
-      <label htmlFor="">Active</label>
-      <input
-        disabled={!currentUserPermissions?.includes("Update")}
-        type="checkbox"
-        className="border"
-        {...register("active")}
-      />
+        <ToggleButton
+          readOnly={!currentUserPermissions?.includes("Update")}
+          disabled={MutationLoading}
+          register={register}
+          name="active"
+          id="active"
+        />
 
-      <label htmlFor="">Permissions</label>
-      {permissionsArray.map((perm, id) => (
-        <div key={id}>
-          <label htmlFor={perm}>{perm}</label>
-          <input
-            disabled={!currentUserPermissions?.includes("Update")}
-            {...register("permissions")}
-            id={perm}
-            value={perm}
-            type="checkbox"
-          />
-        </div>
-      ))}
+        <label htmlFor="">Permissions</label>
+        {permissionsArray.map((perm, id) => (
+          <div key={id}>
+            <label htmlFor={perm}>{perm}</label>
+            <input
+              disabled={!currentUserPermissions?.includes("Update")}
+              {...register("permissions")}
+              id={perm}
+              value={perm}
+              type="checkbox"
+            />
+          </div>
+        ))}
 
-      <button type="submit">Update</button>
-    </form>
+        <Button
+          variant="primary"
+          loading={MutationLoading}
+          type="submit"
+          label="Update"
+        />
+      </form>
+    </div>
   );
 }
 

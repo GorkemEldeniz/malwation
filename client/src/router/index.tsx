@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Navigate,
   RouterProvider,
@@ -8,23 +7,20 @@ import {
 
 import useLogin from "@hooks/useLogin";
 
+import AuthLayout from "@pages/Layout/AuthLayout";
+import MainLayout from "@pages/Layout/MainLayout";
+
 import Users from "@pages/Users";
 import User from "@pages/Users/User";
 
-import Login from "@pages/Login";
-import Register from "@pages/Register";
+import LoginComponent from "@pages/Login";
+import RegisterComponent from "@pages/Register";
 
 const router = (isLogin: boolean) => {
   return createBrowserRouter([
     {
       path: "/",
-      element: isLogin ? (
-        <div>
-          Home- <Outlet />
-        </div>
-      ) : (
-        <Navigate to="/login" replace />
-      ),
+      element: isLogin ? <MainLayout /> : <Navigate to="/login" replace />,
       caseSensitive: true,
       errorElement: <div>hata</div>,
       children: [
@@ -34,11 +30,6 @@ const router = (isLogin: boolean) => {
         },
         {
           path: "users",
-          element: (
-            <div>
-              Users Layout <Outlet />
-            </div>
-          ),
           caseSensitive: false,
           children: [
             {
@@ -63,19 +54,13 @@ const router = (isLogin: boolean) => {
     },
     {
       path: "/login",
-      element: !isLogin ? (
-        <div>
-          Login Layout <Outlet />
-        </div>
-      ) : (
-        <Navigate to="/" replace />
-      ),
+      element: !isLogin ? <AuthLayout /> : <Navigate to="/" replace />,
       errorElement: <div>hata</div>,
       caseSensitive: true,
       children: [
         {
           index: true,
-          element: <Login />,
+          element: <LoginComponent />,
           errorElement: <div>hata</div>,
           caseSensitive: true,
         },
@@ -83,19 +68,13 @@ const router = (isLogin: boolean) => {
     },
     {
       path: "/register",
-      element: !isLogin ? (
-        <div>
-          Register Layout <Outlet />
-        </div>
-      ) : (
-        <Navigate to="/" replace />
-      ),
+      element: !isLogin ? <AuthLayout /> : <Navigate to="/" replace />,
       errorElement: <div>hata</div>,
       caseSensitive: true,
       children: [
         {
           index: true,
-          element: <Register />,
+          element: <RegisterComponent />,
           errorElement: <div>hata</div>,
           caseSensitive: true,
         },

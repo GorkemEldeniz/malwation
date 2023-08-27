@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import Router from "@router";
 
@@ -11,11 +10,9 @@ import client from "@libs/apollo";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <ApolloProvider client={client}>
-      <Provider store={store}>
-        <Router />
-      </Provider>
-    </ApolloProvider>
-  </React.StrictMode>
+  <ApolloProvider client={client}>
+    <Provider store={store}>
+      <Router />
+    </Provider>
+  </ApolloProvider>
 );

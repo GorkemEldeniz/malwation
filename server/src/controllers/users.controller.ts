@@ -25,7 +25,10 @@ export class UsersController {
 
     const usersFiltered = input.name
       ? usersDB.filter(
-          (user) => user.name.toLocaleLowerCase().search(input.name) >= 0,
+          (user) =>
+            user.name
+              .toLocaleLowerCase()
+              .search(input.name.toLocaleLowerCase()) >= 0,
         )
       : usersDB;
 

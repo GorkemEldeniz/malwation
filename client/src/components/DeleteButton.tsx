@@ -1,3 +1,5 @@
+import { ForwardedRef } from "react";
+
 import Button from "./ui/button";
 
 import toast from "react-hot-toast";
@@ -15,7 +17,8 @@ import {
 } from "@utils/api/user/types/DeleteUser";
 import { DELETE_USER } from "@utils/api/user";
 
-interface IDeleteButton {
+export interface IDeleteButton {
+  modalRef: React.RefObject<HTMLDialogElement>;
   currentUserId: string | undefined;
   deletedUserId: string;
   currentUserPermissions:
@@ -27,6 +30,7 @@ function DeleteButton({
   currentUserId,
   deletedUserId,
   currentUserPermissions,
+  modalRef,
 }: IDeleteButton) {
   const dispatch = useAppDispatch();
 
@@ -44,6 +48,7 @@ function DeleteButton({
         if (currentUserId === deletedUserId) {
           dispatch(logout());
         }
+        modalRef?.current?.close();
         toast.success(response.deleteUser.message);
       }
     },
@@ -56,7 +61,6 @@ function DeleteButton({
   });
 
   const handleDelete = () => {
-    console.log("naber");
     if (currentUserPermissions?.includes("Delete")) {
       DeleteUser({
         variables: {

@@ -51,6 +51,41 @@ const button = cva("rounded-md relative", {
       variant: "primary",
       className: "text-primary",
     },
+    {
+      modifier: undefined,
+      size: "slim",
+      className: "px-3 py-[3px]",
+    },
+    {
+      modifier: "outline",
+      size: "slim",
+      className: "px-3 py-[3px]",
+    },
+    {
+      modifier: undefined,
+      size: "medium",
+      className: "px-4 py-2",
+    },
+    {
+      modifier: "outline",
+      size: "medium",
+      className: "px-4 py-2",
+    },
+    {
+      modifier: undefined,
+      size: "large",
+      className: "px-6 py-3",
+    },
+    {
+      modifier: "outline",
+      size: "large",
+      className: "px-6 py-3",
+    },
+    {
+      disabled: true,
+      variant: "default",
+      className: "border-borderDisabled",
+    },
   ],
   defaultVariants: {
     variant: "default",
