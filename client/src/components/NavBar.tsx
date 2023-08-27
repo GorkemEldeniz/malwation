@@ -15,7 +15,7 @@ function NavBar() {
       <div className="flex w-fit items-center justify-between">
         <span className="text-xl text-white">Malwation</span>
       </div>
-      <div className="flex flex-grow items-center" id="navbar-collapse">
+      <div className="flex flex-grow items-center">
         <ul className="mx-auto flex flex-row gap-2">
           <li>
             <NavLink
@@ -34,7 +34,7 @@ function NavBar() {
             </NavLink>
           </li>
         </ul>
-        <div className="my-3 flex lg:my-0">
+        <div className="my-1 flex ">
           <Button
             onClick={() => dispatch(logout())}
             label="Logout"
