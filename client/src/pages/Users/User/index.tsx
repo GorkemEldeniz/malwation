@@ -164,8 +164,9 @@ function User() {
         {errors.password && <div>{errors.password.message}</div>}
 
         <ToggleButton
-          readOnly={!currentUserPermissions?.includes("Update")}
-          disabled={MutationLoading}
+          disabled={
+            MutationLoading || !currentUserPermissions?.includes("Update")
+          }
           register={register}
           name="active"
           id="active"
@@ -179,8 +180,9 @@ function User() {
                 {perm}
               </label>
               <CheckBox
-                readOnly={!currentUserPermissions?.includes("Update")}
-                disabled={MutationLoading}
+                disabled={
+                  MutationLoading || !currentUserPermissions?.includes("Update")
+                }
                 name="permissions"
                 register={register}
                 id={perm}
