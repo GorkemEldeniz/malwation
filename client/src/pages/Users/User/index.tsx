@@ -43,7 +43,7 @@ function User() {
   );
 
   const { loading } = useQuery<GetOneUser, GetOneUserVariables>(GET_ONE_USER, {
-    fetchPolicy: "network-only",
+    fetchPolicy: "cache-and-network",
     variables: {
       input: {
         id: userId as string,

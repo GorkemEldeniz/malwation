@@ -23,7 +23,7 @@ function Users() {
   const { data, loading } = useQuery<GetUsersList, GetUsersListVariables>(
     GET_USERS_LIST,
     {
-      fetchPolicy: "network-only",
+      fetchPolicy: "cache-and-network",
       variables: {
         input: {
           name: nameParamsValue ? nameParamsValue : "",
