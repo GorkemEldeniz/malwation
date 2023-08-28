@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { useState } from "react";
 
 import Modal from "./Modal";
+import Cell from "./Cell";
 
 import toast from "react-hot-toast";
 
@@ -63,8 +64,8 @@ function Table({ data }: ITableProps) {
         deletedUserId={deletedUserId}
       />
       <div className="flex w-full flex-col">
-        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <div className="overflow-x-auto">
+          <div className="inline-block min-w-full align-middle marker:py-2">
             <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
@@ -88,18 +89,7 @@ function Table({ data }: ITableProps) {
                       onClick={() => handleRead(user.id)}
                     >
                       {Object.values(user).map((value, index) => {
-                        return (
-                          <td
-                            key={index}
-                            className="whitespace-nowrap px-6 py-4 text-center"
-                          >
-                            {typeof value === "boolean"
-                              ? value
-                                ? "🟢"
-                                : "🔴"
-                              : value}
-                          </td>
-                        );
+                        return <Cell key={index} value={value} />;
                       })}
                       <td className="whitespace-nowrap px-6 py-4 text-center">
                         <Icon
